@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - apt-get update -y
+      - pip install huggingface_hub boto3
+
+  build:
+    commands:
+      - echo "Downloading model: $MODEL_ID"
+      - python scripts/download_model.py "$MODEL_ID"
+
+  post_build:
+    commands:
+      - echo "Uploading model to S3: $S3_BUCKET"
+      - aws s3 sync models/ "s3://$S3_BUCKET/models/$MODEL_ID/"
+
+artifacts:
+  files:
+    - "**/*"
