@@ -13,9 +13,9 @@ phases:
 
   post_build:
     commands:
-      - echo "Uploading model to S3: $S3_BUCKET"
+      - echo "Uploading to S3 bucket: $S3_BUCKET"
       - aws s3 sync models/ "s3://$S3_BUCKET/models/$MODEL_ID/"
-
+ 
 artifacts:
   files:
     - "**/*"
