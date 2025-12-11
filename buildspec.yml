@@ -15,7 +15,3 @@ phases:
     commands:
       - echo "Uploading to S3 bucket: $S3_BUCKET"
       - aws s3 sync models/ "s3://$S3_BUCKET/models/$MODEL_ID/"
- 
-artifacts:
-  files:
-    - "**/*"
